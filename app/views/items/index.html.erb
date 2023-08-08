@@ -128,7 +128,7 @@
     </div>
     <ul class='item-lists'>
       <% if @items.present? %>
-        <% @items.order(created_at: :desc).each do |item| %>
+        <% @items.each do |item| %>
         <li class='list'>
           <%= link_to "#" do %>
           <div class='item-img-content'>
