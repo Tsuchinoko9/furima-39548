@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :items
+
+
   validates :nickname, presence: true
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
