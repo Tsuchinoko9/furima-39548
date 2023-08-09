@@ -23,7 +23,7 @@
       </span>
     </div>
 
-    <% if user_signed_in? && PurchaseRecord.where(item_id: @item.id).none? %>
+    <% if user_signed_in? # && PurchaseRecord.where(item_id: @item.id).none? %>
       <% if current_user.id == @item.user_id %>
         <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
