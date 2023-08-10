@@ -1,0 +1,3 @@
+class PurchaseRecordShippingAddress
+
+end
