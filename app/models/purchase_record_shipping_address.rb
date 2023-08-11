@@ -15,7 +15,7 @@ class PurchaseRecordShippingAddress
     validates :prefecture_id,     numericality: { other_than: 1, message: "can't be blank" } do
     validates :city
     validates :addresses
-    validates :phone_number,      numericality: { only_integer: true, length: { in: 10..11 } }
+    validates :phone_number,      format: { with: /\A[0-9]{10}$|^[0-9]{11}\z/ }
     validates :purchase_record_id
   end
 
