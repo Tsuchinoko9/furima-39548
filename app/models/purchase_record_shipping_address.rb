@@ -1,7 +1,7 @@
 class PurchaseRecordShippingAddress
   include ActiveModel::Model
   attr_accessor :item_id, :user_id,
-                :postal_code, :prefecture_id, :prefecture_id, :city, :addresses, :building, :phone_number,
+                :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number,
                 :token
 
   # クレジットカードのトークンのバリデーション
