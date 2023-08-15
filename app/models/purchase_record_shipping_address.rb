@@ -15,11 +15,11 @@ class PurchaseRecordShippingAddress
 
   # shipping_addressesのバリデーション
   with_options presence: true do
-    validates :postal_code,       format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
-    validates :prefecture_id,     numericality: { other_than: 1, message: "can't be blank" }
+    validates :postal_code,   format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
+    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city
     validates :addresses
-    validates :phone_number,      format: { with: /\A[0-9]{10}$|^[0-9]{11}\z/ }
+    validates :phone_number,  format: { with: /\A[0-9]{10}$|^[0-9]{11}\z/ }
   end
 
   def save
@@ -28,6 +28,7 @@ class PurchaseRecordShippingAddress
     # shipping_addressesテーブルにデータを保存する処理
     # purchase_record_idには、上の行で定義した変数purchase_recordのidを指定する
     ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, 
-                           addresses: addresses, building: building, phone_number: phone_number, purchase_record_id: purchase_record.id)
+                           addresses: addresses, building: building, phone_number: phone_number,
+                           purchase_record_id: purchase_record.id)
   end
 end
