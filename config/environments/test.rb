@@ -57,4 +57,6 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  config.active_job.queue_adapter = :inline #MySQLのエラー(外部キーの処理の負荷が関係)が出たため追記
 end

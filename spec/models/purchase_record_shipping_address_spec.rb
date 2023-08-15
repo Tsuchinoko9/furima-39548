@@ -3,12 +3,9 @@ require 'rails_helper'
 RSpec.describe PurchaseRecordShippingAddress, type: :model do
   before do
     user = FactoryBot.create(:user)
-    @purchase_record_shipping_address = PurchaseRecordShippingAddress.new(
-                                          token:"tok_abcdefghijk00000000000000000",
-                                          postal_code: '123-4567', prefecture_id: 2, 
-                                          city: 'A市', addresses: 'B区8-9', 
-                                          building: 'Cビル10号室', phone_number: '09012345678', 
-                                          user_id: user.id, item_id: 3333)
+    item = FactoryBot.create(:item)
+    @purchase_record_shipping_address = FactoryBot.build(:purchase_record_shipping_address,
+                                                          user_id: user.id, item_id: item.id)
   end
 
   describe '商品購入' do
@@ -31,6 +28,7 @@ RSpec.describe PurchaseRecordShippingAddress, type: :model do
       it 'tokenが空では商品購入はできない' do
         @purchase_record_shipping_address.token = ''
         @purchase_record_shipping_address.valid?
+        binding.pry
         expect(@purchase_record_shipping_address.errors.full_messages).to include("Token can't be blank")
       end
 
