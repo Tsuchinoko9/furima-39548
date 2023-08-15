@@ -1,6 +1,8 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item_id, only: [:index, :create]
+  before_action :user_check_move_to_top, only: [:index, :create]
+ 
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -42,4 +44,10 @@ class PurchaseRecordsController < ApplicationController
     )
   end
 
+  def user_check_move_to_top
+    # @item.idの値は事前にset_item_idが実行されて取得される
+    return unless current_user.id == @item.user_id
+
+    redirect_to root_path
+  end
 end
