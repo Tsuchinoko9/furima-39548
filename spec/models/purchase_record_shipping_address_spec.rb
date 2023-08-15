@@ -14,11 +14,13 @@ RSpec.describe PurchaseRecordShippingAddress, type: :model do
   describe '商品購入' do
     context '商品購入ができる場合' do
       it 'token・postal_code・prefecture_id・city・addresses・phone_numberが適切な値で存在し、
+          user_idとitem_idが紐づいており、
           buildingが存在する場合に商品購入ができる' do
         expect(@purchase_record_shipping_address).to be_valid
       end 
 
       it 'token・postal_code・prefecture_id・city・addresses・phone_numberが適切な値で存在し、
+          user_idとitem_idが紐づいており、
           buildingが空の場合でも商品購入ができる' do
         @purchase_record_shipping_address.building = ''
         expect(@purchase_record_shipping_address).to be_valid
@@ -69,9 +71,33 @@ RSpec.describe PurchaseRecordShippingAddress, type: :model do
       end
 
       it 'phone_numberが「10桁以上11桁以内」の半角数値でなければ商品購入はできない' do
-        @purchase_record_shipping_address.phone_number = '090-1234-5678'
+        @purchase_record_shipping_address.phone_number = '123-45-6789'
         @purchase_record_shipping_address.valid?
         expect(@purchase_record_shipping_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it 'phone_numberが「9桁以下」では商品購入はできない' do
+        @purchase_record_shipping_address.phone_number = '123456789'
+        @purchase_record_shipping_address.valid?
+        expect(@purchase_record_shipping_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it 'phone_numberが「12桁以上」では商品購入はできない' do
+        @purchase_record_shipping_address.phone_number = '123456789012'
+        @purchase_record_shipping_address.valid?
+        expect(@purchase_record_shipping_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it 'user_idが紐付いていなければ商品購入はできない' do
+        @purchase_record_shipping_address.user_id = ''
+        @purchase_record_shipping_address.valid?
+        expect(@purchase_record_shipping_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが紐付いていなければ商品購入はできない' do
+        @purchase_record_shipping_address.item_id = ''
+        @purchase_record_shipping_address.valid?
+        expect(@purchase_record_shipping_address.errors.full_messages).to include("Item can't be blank")
       end
 
     end
