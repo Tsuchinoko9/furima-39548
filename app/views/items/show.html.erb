@@ -29,7 +29,8 @@
         <p class="or-text">or</p>
         <%= link_to "削除", item_path(@item.id), data: { turbo_method: :delete }, class:"item-destroy" %>
       <% else %>
-    <%= link_to "購入画面に進む", item_purchase_records_path(@item.id) ,class:"item-red-btn"%>
+      <%# 商品購入画面に遷移した際にJavascriptの動作に影響を与えないためdata:{turbo: false}のオプションを指定 %>
+      <%= link_to "購入画面に進む", item_purchase_records_path(@item.id) , data:{turbo: false}, class:"item-red-btn"%>
       <% end %>
     <% end %>
 

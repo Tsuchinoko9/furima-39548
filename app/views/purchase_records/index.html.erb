@@ -1,3 +1,5 @@
+<%= include_gon %>
+
 <%= render "shared/second-header"%>
 
 <div class='transaction-contents'>
@@ -31,8 +33,8 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with id: 'charge-form', model: @purchase_record_shipping_address, url: item_purchase_records_path, 
-                  class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with id: 'charge-form', model: @purchase_record_shipping_address, data:{turbo: false},
+                                     url: item_purchase_records_path, class: 'transaction-form-wrap',local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
